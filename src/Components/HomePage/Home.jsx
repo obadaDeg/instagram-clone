@@ -10,7 +10,7 @@ import Profile from "../../pages/Profile";
 function Home() {
   return (
     <div>
-      dog
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Message" element={<Messages />} />
