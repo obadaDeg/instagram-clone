@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./Components/NavBar/NavBar.jsx";
@@ -9,21 +10,22 @@ import Profile from "./pages/Profile";
 import LoginPage from "./Components/LoginPage/LoginPage.jsx";
 import MainContent from "./Components/MainContent/MainContent";
 import { Grid } from "@mui/material";
+import { Login } from "@mui/icons-material";
 
 function App() {
-  const isLoggedIn = true; // You can modify this logic for authentication
+  const isLoggedIn = true; 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <div className="App">
-      <Grid container>
-        <Grid item xs={2}>
-          <NavBar />
-        </Grid>
-        <Grid item xs={10}>
-          <MainContent />
-        </Grid>
-      </Grid>
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/message" element={<Messages />} />

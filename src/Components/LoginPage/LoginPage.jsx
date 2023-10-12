@@ -1,5 +1,5 @@
 import "./LoginPage.css";
-import React from "react";
+import React, { useState } from "react";
 import { Divider, Grid } from "@mui/material";
 import loginPageImg from "../../assets/loginPageImg.svg";
 import { Link } from "react-router-dom";
@@ -12,7 +12,12 @@ import SignUpLower from "../SignUp/SignUpLower";
 
 
 function LoginPage() {
-  let isLoggedIn = false;
+  let [flag, setFlag] = useState(true);
+
+  const handleFlag = () => {
+    setFlag(!flag);
+  };
+
   return (
     <>
       <Grid container>
@@ -27,11 +32,11 @@ function LoginPage() {
             <div className="right-side">
               <div className="upper-div">
                 <img className="instagram-logo" src={instagramLogo} alt="" />
-                {isLoggedIn? <SignInUpper />: <SignUpUpper />}
+                {flag? <SignInUpper />: <SignUpUpper />}
               </div>
 
               <div className="lower-div">
-                {isLoggedIn? <SignInLower /> : <SignUpLower />}
+                {flag? <SignInLower handleFlag={handleFlag}/> : <SignUpLower handleFlag={handleFlag}/>}
               </div>
             </div>
           </div>
