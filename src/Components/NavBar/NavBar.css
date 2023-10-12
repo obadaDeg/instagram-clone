@@ -4,6 +4,7 @@
   color: #ffffff;
   display: flex;
   flex-direction: column;
+  position: fixed;
 }
 
 
@@ -15,6 +16,8 @@
 
 .navbar Button {
     margin-top: 10px;
+    text-transform: none;
+
 }
 
 .navbar Button:hover {

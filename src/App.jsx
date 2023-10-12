@@ -7,6 +7,7 @@ import Messages from "./pages/Messages";
 import Explore from "./pages/Explore";
 import Profile from "./pages/Profile";
 import LoginPage from "./Components/LoginPage/LoginPage.jsx";
+import MainContent from "./Components/MainContent/MainContent";
 import { Grid } from "@mui/material";
 
 function App() {
@@ -15,7 +16,12 @@ function App() {
   return (
     <div className="App">
       <Grid container>
-        <NavBar />
+        <Grid item xs={2}>
+          <NavBar />
+        </Grid>
+        <Grid item xs={10}>
+          <MainContent />
+        </Grid>
       </Grid>
 
       <Routes>

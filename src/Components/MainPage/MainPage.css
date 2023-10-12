@@ -1,23 +1,31 @@
-.mainpage__uploadicon {
-    height: 80px;
-    width: 80px;
+.main-page {
+    padding: 50px;
+    width: 650px;
+    margin-left: 30px;
 }
-.mainpage__divider {
-    height: 0px;
-    width: 220px;
-    border: 1px solid #dbdbdb;
-    margin-top: 40px;
+
+.divider {
+    width: 100%;
+    background-color: #1d1d1d;
 }
-.mainpage__container {
-    text-align: center;
-    margin: 0px 10px 0px -20px;
-    display :flex ;
-    justify-content: center ;
-}   
-.fileupload > input { 
+
+.story-section {
+    width: 100%;
+    height: 70px;
+    margin: 5px;
+    padding: 10px;
+    margin-top: -4px;
+    display: flex;
+    overflow-x: scroll;
+}
+
+.story-section::-webkit-scrollbar {
     display: none;
 }
-.upload_text {
-    text-align: center;
-    margin-left: -25px;
+
+.story {
+    min-width: 66px;
+    min-height: 66px;
+    border: 3px solid #DF3968;
+    margin-left: 10px;
 }

@@ -1,36 +1,57 @@
-.post__container {
-    width: 615px;
-    border: 1px solid #dbdbdb;
-    background-color: white;
-    margin-bottom: 25px;
+.post-container {
+  margin-top: 20px;
+  margin-left: 50px;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
 }
-.post__header{
-    height: 60px;
-    border-bottom: 1px solid #dbdbdb;
-    display: flex;
+
+.post-content {
+  margin-top: 15px;
+  border: 1px solid #1d1d1d;
 }
-.post__image{
-    min-width: 30px;
-    min-height: 30px;
-    margin: 10px;
+
+.post-owner {
+  display: flex;
+  align-items: center;
 }
-.post__username{
-    font-weight: bold;
-    margin-top: 20px;
+
+.post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.post_reactimage {
-    width: 25px;
-    height:25px;
-    margin: 5px;
+
+.post-interactions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
 }
-.post_comment {
-    margin: 10px;
+
+.likes-text {
+  padding: 0;
+  margin: 0;
+  font-weight: 600;
 }
-.post__commentbox {
-    height: 56px;
-    width: 601px;
-    border: 0px;
-    border-top: 1px solid #dbdbdb;
-    font-size: 16px;
-    padding-left: 10px;
+
+.user-name {
+  margin-left: 5px;
+  font-weight: 600;
+}
+
+.user-caption {
+  padding: 0;
+  margin: 0;
+}
+
+.divider {
+  background-color: #1d1d1d;
+}
+
+.post-header Button {
+  color: #ffffff;
+}
+
+.post-header Button:hover {
+  color: #383737;
 }

@@ -16,13 +16,7 @@ const drawerWidth = 240;
 function Home() {
   return (
     <div>
-      <Grid container>
-        <Grid xs={3}>
-          <NavBar />
-        </Grid>
-        
-        <Grid xs={9}></Grid>
-      </Grid>
+
     </div>
   );
 }
