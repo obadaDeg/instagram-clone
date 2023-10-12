@@ -1,20 +1,27 @@
-.navbar__barContent {
-    height: 54px;
-    background-color: white;
-    border-bottom: 1px solid #dbdbdb;
+.navbar {
+  width: 200px;
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
 }
-.navbar_logo{
+
+
+
+.navbar img {
+    padding-left: 15px;   
+    width: 130px; 
+}
+
+.navbar Button {
     margin-top: 10px;
 }
-.navbar__img {
-    margin:15px 10px;
+
+.navbar Button:hover {
+    background-color: #1d1d1d;
+    color: #ffffff;
 }
-.navbar__searchBar {
-    height: 30px;
-    width: 215px;
-    margin-top: 10px;
-    border: 1px solid #dbdbdb;
-    text-align: center;
-    background-color: #fafafa;
-    border-radius: 5px;
+
+.menu {
+    margin-top: 85%;
 }
