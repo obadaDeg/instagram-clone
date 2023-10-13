@@ -19,12 +19,17 @@ import {
   FavoriteBorder as FavoriteBorderIcon,
   Menu as MenuIcon,
   AddCircleOutline,
+  Create,
 } from "@mui/icons-material";
+import CreatePost from "../CreatePost/CreatePost.jsx";
 
 const width = 175;
 const fontSize = 17;
 
 function NavBar() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <div className="navbar">
       <Box
@@ -123,6 +128,7 @@ function NavBar() {
           </div>
           <div className="create">
             <Button
+              onClick={handleOpen}
               sx={{
                 fontSize: fontSize,
                 width: width,
@@ -133,6 +139,7 @@ function NavBar() {
               <AddCircleOutline />
               Create
             </Button>
+            <CreatePost open={open} handleClose={handleClose} /> 
           </div>
           <div className="profile">
             <Link to="/profile">

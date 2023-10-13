@@ -39,10 +39,10 @@ function Post(props) {
           <BookmarkBorderOutlinedIcon style={{ marginLeft: "auto" }} />
         </div>
         <div className="post-text">
-          <p className="likes-text">744 likes</p>
-          <p className="user-name">omaradwn</p>
+          <p className="likes-text">likes</p>
+          <p className="user-name">UserName</p>
           <p className="user-caption">
-            This is a test and static data will be changed using API.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur nostrum hic, id, ut ex voluptates vitae cumque voluptatum quis harum aliquam doloribus facilis molestias similique quisquam, dicta sed! Asperiores, dolore.
           </p>
         </div>
       </div>
