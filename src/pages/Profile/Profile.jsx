@@ -69,7 +69,7 @@ function Profile() {
             </div>
             <Divider sx={{ backgroundColor: "#2b2b2b" }} />
             <div className="profile-content">
-              <div className="buttons">
+              <div className="profile-content-buttons">
                 <Button variant="" disableRipple>
                   Posts
                 </Button>
@@ -83,7 +83,6 @@ function Profile() {
               <div className="content">
                 <ImageList className="image-list" cols={3} rowHeight={400}>
                   {" "}
-                  {/* Adjust the rowHeight */}
                   {arrayOfPic.map((item, index) => (
                     <ImageListItem className="image-container" key={index}>
                       <img

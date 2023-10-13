@@ -1,8 +1,12 @@
 
 .image-list-container {
-    margin-left: 150px;
+    margin-left: 120px;
+    padding-top : 50px;
+    width: 80%;
 
 }
+
+
 
 .image-list {
     width: 800px;

@@ -42,14 +42,13 @@
   margin-left: 20px;
 }
 
-.buttons {
+.profile-content-buttons {
   display: flex;
   justify-content: center;
-  left: 50%;
-  margin-top: -1px;
+  align-items: center;
 }
 
-.buttons button {
+.profile-content-buttons button {
     height: 50px;
     border: #ffffff;
     color: #ffffff;

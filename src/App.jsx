@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/Messages");
+      navigate("/");
     } else {
       navigate("/login");
     }

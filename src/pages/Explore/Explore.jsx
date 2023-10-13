@@ -13,7 +13,7 @@ const arrayOfPic = imageFiles.map((path) => imageContext(path));
 
 function Explore() {
   return (
-    <div className="container">
+    <div>
       <Grid container>
         <Grid item xs={2}>
           <NavBar />
@@ -22,7 +22,6 @@ function Explore() {
           <div className="image-list-container">
             <ImageList className="image-list" cols={3} rowHeight={400}>
               {" "}
-              {/* Adjust the rowHeight */}
               {arrayOfPic.map((item, index) => (
                 <ImageListItem className="image-container" key={index}>
                   <img
