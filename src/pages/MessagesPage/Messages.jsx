@@ -25,13 +25,11 @@ const Messages = () => {
       username: "User1",
       lastMessage: "Hello, how are you?",
       avatarSrc: "/static/images/avatar/user1.jpg",
-      // You can include a messages array for each user
       messages: [
         { id: 1, text: "Hi there" },
         { id: 2, text: "How's it going?" },
       ],
     },
-    // ... (other user data)
   ];
 
   const handleUserClick = (user) => {
