@@ -1,0 +1,62 @@
+.container {
+  margin: 0 auto;
+  width: 80%;
+}
+.profile-header {
+  margin: 50px auto;
+  width: 80%;
+  display: flex;
+}
+
+.avatar {
+  min-width: 130px;
+  min-height: 130px;
+  border: 1px groove #ffffff;
+}
+
+.profile-data {
+  width: 500px;
+  margin-left: 50px;
+}
+
+.profile-username {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btns button {
+  font-size: small;
+  margin-left: 10px;
+}
+
+.settings:hover {
+  cursor: pointer;
+}
+
+.profile-status {
+  display: flex;
+}
+
+.profile-information {
+  margin-left: 20px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  left: 50%;
+  margin-top: -1px;
+}
+
+.buttons button {
+    height: 50px;
+    border: #ffffff;
+    color: #ffffff;
+}
+
+.image-list {
+    width: 100%;
+    margin-top: 0px;
+}
+

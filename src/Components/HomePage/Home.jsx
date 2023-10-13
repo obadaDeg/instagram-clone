@@ -14,7 +14,6 @@ import {
   Toolbar,
 } from "@mui/material";
 import NavBar from "../NavBar/NavBar";
-import Messages from "../../pages/Messages/Messages.jsx";
 import Explore from "../../pages/Explore/Explore.jsx";
 import Profile from "../../pages/Profile/Profile.jsx";
 import LoginPage from "../LoginPage/LoginPage.jsx";

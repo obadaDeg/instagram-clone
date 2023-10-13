@@ -1,0 +1,24 @@
+
+.image-list-container {
+    margin-left: 150px;
+
+}
+
+.image-list {
+    width: 800px;
+    margin-top: 40px;
+}
+
+.image-container {
+    height: 500px;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+}
+
+.image-list::-webkit-scrollbar {
+  display: none;
+}
+

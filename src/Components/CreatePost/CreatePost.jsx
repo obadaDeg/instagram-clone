@@ -1,21 +1,15 @@
 import React, { useState } from "react";
 import "./CreatePost.css";
-import {
-  Box,
-  Button,
-  Typography,
-  Modal,
-  Divider,
-  Grid,
-  TextField,
-} from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import { Divider, Grid, TextField } from "@mui/material";
 import { styled } from "@mui/joy";
 
 const modalStyle = {
-  modal: {
-    padding: "10px",
-  },
-  box: {
+  modalStyle: { padding: "10px" },
+  boxStyle: {
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -27,29 +21,22 @@ const modalStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "20px",
+    paddingTop: "20px",
+    paddingBottom: "20px",
     borderRadius: "10px",
   },
-  header: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  divider: {
+
+  dividerStyle: {
     width: "100%",
     backgroundColor: "#ffffff",
+    martinTop: "100px",
+    marginBottom: "20px",
   },
-  input: {
+
+  inputStyle: {
     width: "90%",
     color: "#ffffff",
     marginBottom: "20px",
-  },
-  uploadButton: {
-    margin: "10px 0",
-  },
-  postButton: {
-    alignSelf: "flex-end",
-    marginTop: "auto",
   },
 };
 
@@ -69,28 +56,30 @@ function CreatePost({ open, handleClose }) {
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState("");
 
-  const handleImageChange = (event) => {
+  function handleImageChange(event) {
     const file = event.target.files[0];
     if (file) {
+      // You can add further validation if needed (e.g., file type, size)
       setImage(file);
     }
-  };
+  }
 
-  const handleCreatePost = () => {
+  function handleCreatePost() {
     if (image) {
+      // Handle image upload or display a preview
       console.log("Selected image:", image);
-      // Upload the image to a server or perform other actions here
+      // You can upload the image to a server or perform other actions here
     }
+
+    // Handle other post creation actions (e.g., description)
     console.log("Description:", description);
-  };
+  }
 
   return (
-    <Modal open={open} onClose={handleClose} style={modalStyle.modal}>
-      <Box sx={modalStyle.box}>
-        <div style={modalStyle.header}>
-          <Typography variant="h5">Create Post</Typography>
-          <Divider style={modalStyle.divider} />
-        </div>
+    <Modal open={open} onClose={handleClose} style={modalStyle.modalStyle}>
+      <Box sx={modalStyle.boxStyle}>
+        <Typography variant="h5">Create Post</Typography>
+        <Divider style={modalStyle.dividerStyle} />
         <div className="modal-body">
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -99,19 +88,13 @@ function CreatePost({ open, handleClose }) {
                 variant="outlined"
                 fullWidth
                 multiline
-                style={modalStyle.input}
+                style={modalStyle.inputStyle}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                InputProps={{ style: { color: "#ffffff" } }}
               />
             </Grid>
-          </Grid>
-          <Button
-            component="label"
-            variant="contained"
-            color="primary"
-            style={modalStyle.uploadButton}
-          >
+          </Grid>{" "}
+          <Button component="label" variant="contained" color="primary">
             Upload
             <VisuallyHiddenInput type="file" onChange={handleImageChange} />
           </Button>
@@ -119,7 +102,6 @@ function CreatePost({ open, handleClose }) {
             variant="contained"
             color="primary"
             onClick={handleCreatePost}
-            style={modalStyle.postButton}
           >
             Post
           </Button>

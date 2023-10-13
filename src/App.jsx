@@ -4,7 +4,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./Components/NavBar/NavBar.jsx";
 import Home from "./Components/HomePage/Home.jsx";
-import Messages from "./pages/Messages/Messages";
+import Messages from "./pages/MessagesPage/Messages.jsx";
 import Explore from "./pages/Explore/Explore";
 import Profile from "./pages/Profile/Profile";
 import LoginPage from "./Components/LoginPage/LoginPage.jsx";
@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/");
+      navigate("/Messages");
     } else {
       navigate("/login");
     }
@@ -28,15 +28,13 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/message" element={<Messages />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/Messages" element={<Messages />} />
+        <Route path="/Explore" element={<Explore />} />
+        <Route path="/Profile" element={<Profile />} />
+        <Route path="/Login" element={<LoginPage />} />
       </Routes>
     </div>
   );
 }
-
-
 
 export default App;

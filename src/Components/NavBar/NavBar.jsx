@@ -62,18 +62,18 @@ function NavBar() {
                 Home
               </Button>
             </Link>
-              <Button
-                sx={{
-                  fontSize: fontSize,
-                  width: width,
-                  borderRadius: "5px",
-                  color: "#ffffff",
-                }}
-              >
-                <SearchIcon />
-                Search
-              </Button>
-            <Link to="/explore">
+            <Button
+              sx={{
+                fontSize: fontSize,
+                width: width,
+                borderRadius: "5px",
+                color: "#ffffff",
+              }}
+            >
+              <SearchIcon />
+              Search
+            </Button>
+            <Link to="/Explore">
               <Button
                 sx={{
                   fontSize: fontSize,
@@ -86,20 +86,18 @@ function NavBar() {
                 Explore
               </Button>
             </Link>
-            <Link to="/Reels">
-              <Button
-                sx={{
-                  fontSize: fontSize,
-                  width: width,
-                  borderRadius: "5px",
-                  color: "#ffffff",
-                }}
-              >
-                <SlideshowIcon />
-                Reels
-              </Button>
-            </Link>
-            <Link to="/message">
+            <Button
+              sx={{
+                fontSize: fontSize,
+                width: width,
+                borderRadius: "5px",
+                color: "#ffffff",
+              }}
+            >
+              <SlideshowIcon />
+              Reels
+            </Button>
+            <Link to="/Messages">
               <Button
                 sx={{
                   fontSize: fontSize,
@@ -112,19 +110,17 @@ function NavBar() {
                 Messages
               </Button>
             </Link>
-            <Link to="/">
-              <Button
-                sx={{
-                  fontSize: fontSize,
-                  width: width,
-                  borderRadius: "5px",
-                  color: "#ffffff",
-                }}
-              >
-                <FavoriteBorderIcon />
-                Notifications
-              </Button>
-            </Link>
+            <Button
+              sx={{
+                fontSize: fontSize,
+                width: width,
+                borderRadius: "5px",
+                color: "#ffffff",
+              }}
+            >
+              <FavoriteBorderIcon />
+              Notifications
+            </Button>
           </div>
           <div className="create">
             <Button
@@ -139,10 +135,10 @@ function NavBar() {
               <AddCircleOutline />
               Create
             </Button>
-            <CreatePost open={open} handleClose={handleClose} /> 
+            <CreatePost open={open} handleClose={handleClose} />
           </div>
           <div className="profile">
-            <Link to="/profile">
+            <Link to="/Profile">
               <Button
                 sx={{
                   fontSize: fontSize,
@@ -174,5 +170,7 @@ function NavBar() {
     </div>
   );
 }
+
+
 
 export default NavBar;

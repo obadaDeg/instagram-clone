@@ -1,9 +1,107 @@
-import React from 'react'
+import React, { useState } from "react";
+import { Avatar, Button, Divider, Grid, ImageList, ImageListItem } from "@mui/material";
+import SettingsIcon from "@mui/icons-material/Settings";
+import NavBar from "../../Components/NavBar/NavBar";
+import "./Profile.css";
+const imageContext = require.context(
+  "../../assets/ExplorePics",
+  false,
+  /\.(avif|webp)$/
+);
+const imageFiles = imageContext.keys();
+const arrayOfPic = imageFiles.map((path) => imageContext(path));
 
 function Profile() {
+  const [posts, setPosts] = useState([]);
+  const number = 10;
+
   return (
-    <div>Profile</div>
-  )
+    <div>
+      <Grid container>
+        <Grid item xs={2}>
+          <NavBar />
+        </Grid>
+        <Grid item xs={10}>
+          <div className="container">
+            <div className="profile-header">
+              <Avatar className="avatar" />
+              <div className="profile-data">
+                <div className="profile-username">
+                  <h3>Username</h3>
+                  <div className="btns">
+                    <Button className="profile-btn" variant="contained">
+                      Edit Profile
+                    </Button>
+                    <Button className="profile-btn" variant="contained">
+                      View Archive
+                    </Button>
+                    <Button
+                      className="settings"
+                      startIcon={<SettingsIcon style={{ color: "#ffffff" }} />}
+                      disableRipple
+                    ></Button>
+                  </div>
+                </div>
+                <div className="profile-status">
+                  <div className="profile-information">
+                    <p>{number} Posts</p>
+                  </div>
+                  <div className="profile-information">
+                    <p>{number} Followers</p>
+                  </div>
+                  <div className="profile-information">
+                    <p>{number} Following</p>
+                  </div>
+                </div>
+                <div className="profile-bio">
+                  <p>
+                    <strong>Profile Name</strong>
+                  </p>
+                  <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Autem natus quia facilis, sit provident, incidunt fugiat
+                    nulla dicta alias distinctio, deserunt repellendus
+                    asperiores consequatur odio iusto harum consectetur tenetur
+                    obcaecati?
+                  </p>
+                </div>
+              </div>
+            </div>
+            <Divider sx={{ backgroundColor: "#2b2b2b" }} />
+            <div className="profile-content">
+              <div className="buttons">
+                <Button variant="" disableRipple>
+                  Posts
+                </Button>
+                <Button variant="" disableRipple>
+                  Reels
+                </Button>
+                <Button variant="" disableRipple>
+                  Tagged
+                </Button>
+              </div>
+              <div className="content">
+                <ImageList className="image-list" cols={3} rowHeight={400}>
+                  {" "}
+                  {/* Adjust the rowHeight */}
+                  {arrayOfPic.map((item, index) => (
+                    <ImageListItem className="image-container" key={index}>
+                      <img
+                        className="image"
+                        src={item}
+                        alt=""
+                        style={{ width: "100%", height: "100%" }}
+                      />
+                    </ImageListItem>
+                  ))}
+                </ImageList>
+              </div>
+            </div>
+          </div>
+        </Grid>
+      </Grid>
+    </div>
+  );
 }
 
-export default Profile
+export default Profile;
