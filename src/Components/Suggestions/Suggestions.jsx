@@ -3,10 +3,11 @@ import "./Suggestions.css";
 import { Avatar, Button } from "@mui/material";
 import SuggestionPopOut from "./SuggestionPopOut";
 
-function Suggestions() {
+function Suggestions({ users }) {
+  const user = localStorage.getItem("current-account");
   return (
     <div className="suggestions-container">
-      <SuggestionPopOut btn={false}></SuggestionPopOut>
+      {/* <SuggestionPopOut btn={false} users={user}></SuggestionPopOut> */}
       <div>
         <div className="suggestions-header">
           <div className="header-text">
@@ -17,9 +18,9 @@ function Suggestions() {
           </div>
         </div>
         <div className="suggestions-body">
-          <SuggestionPopOut></SuggestionPopOut>
-          <SuggestionPopOut></SuggestionPopOut>
-          <SuggestionPopOut></SuggestionPopOut>
+          {users.map((user, index) =>{
+          return <SuggestionPopOut user={user}></SuggestionPopOut>
+          })}
         </div>
       </div>
     </div>

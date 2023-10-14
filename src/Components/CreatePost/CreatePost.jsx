@@ -1,15 +1,22 @@
 import React, { useState } from "react";
-import "./CreatePost.css";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import { Divider, Grid, TextField } from "@mui/material";
-import { styled } from "@mui/joy";
+import {
+  Modal,
+  Box,
+  Button,
+  Divider,
+  Typography,
+  FormControl,
+  Input,
+  Stack,
+} from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import axios from "axios";
 
 const modalStyle = {
-  modalStyle: { padding: "10px" },
-  boxStyle: {
+  modal: {
+    padding: "10px",
+  },
+  box: {
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -17,7 +24,6 @@ const modalStyle = {
     width: 400,
     height: 500,
     bgcolor: "#1d1d1d",
-    boxShadow: 24,
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -25,86 +31,110 @@ const modalStyle = {
     paddingBottom: "20px",
     borderRadius: "10px",
   },
-
-  dividerStyle: {
+  divider: {
     width: "100%",
     backgroundColor: "#ffffff",
-    martinTop: "100px",
-    marginBottom: "20px",
+    margin: "20px 0",
   },
-
-  inputStyle: {
+  input: {
     width: "90%",
     color: "#ffffff",
     marginBottom: "20px",
   },
+  image: {
+    maxWidth: "100%",
+    maxHeight: "200px",
+  },
 };
-
-const VisuallyHiddenInput = styled("input")`
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  white-space: nowrap;
-  width: 1px;
-`;
-
 function CreatePost({ open, handleClose }) {
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState("");
+  const token = localStorage.getItem("token");
+  const [error, setError] = useState("");
 
-  function handleImageChange(event) {
+  const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      // You can add further validation if needed (e.g., file type, size)
-      setImage(file);
+      setImage(URL.createObjectURL(file));
     }
-  }
+  };
 
-  function handleCreatePost() {
-    if (image) {
-      // Handle image upload or display a preview
-      console.log("Selected image:", image);
-      // You can upload the image to a server or perform other actions here
+  const handleSubmit = () => {
+    if (!image) {
+      setError("Please select an image.");
+      return;
     }
 
-    // Handle other post creation actions (e.g., description)
-    console.log("Description:", description);
-  }
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("description", description);
+
+    axios
+      .post("http://16.170.173.197/posts", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        handleClose();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    setError("");
+    handleSubmit();
+  };
 
   return (
-    <Modal open={open} onClose={handleClose} style={modalStyle.modalStyle}>
-      <Box sx={modalStyle.boxStyle}>
-        <Typography variant="h5">Create Post</Typography>
-        <Divider style={modalStyle.dividerStyle} />
+    <Modal open={open} onClose={handleClose} style={modalStyle.modal}>
+      <Box sx={modalStyle.box}>
+        <Typography variant="h5" sx={{ marginBottom: "10px" }}>
+          Create Post
+        </Typography>
+        <Divider style={modalStyle.divider} />
         <div className="modal-body">
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                label="Description"
-                variant="outlined"
-                fullWidth
-                multiline
-                style={modalStyle.inputStyle}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </Grid>
-          </Grid>{" "}
-          <Button component="label" variant="contained" color="primary">
-            Upload
-            <VisuallyHiddenInput type="file" onChange={handleImageChange} />
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleCreatePost}
-          >
-            Post
-          </Button>
+          <form>
+            <Stack spacing={2}>
+              <FormControl>
+                <Input
+                  style={modalStyle.input}
+                  placeholder="Description"
+                  color="primary"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </FormControl>
+              <FormControl>
+                <Button
+                  component="label"
+                  variant="contained"
+                  startIcon={<CloudUploadIcon />}
+                >
+                  Upload file
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    style={{ display: "none" }}
+                  />
+                </Button>
+              </FormControl>
+              {image && (
+                <img src={image} alt="Selected" style={modalStyle.image} />
+              )}
+              {error && (
+                <p style={{ color: "red" }}>{error}</p>
+              )}
+              <Button type="submit" onClick={handleFormSubmit}>
+                Submit
+              </Button>
+            </Stack>
+          </form>
         </div>
       </Box>
     </Modal>

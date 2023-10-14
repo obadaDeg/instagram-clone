@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Home.css";
 import { Link, Route, Routes, Switch } from "react-router-dom";
 import {
@@ -18,12 +18,15 @@ import Explore from "../../pages/Explore/Explore.jsx";
 import Profile from "../../pages/Profile/Profile.jsx";
 import LoginPage from "../LoginPage/LoginPage.jsx";
 import MainContent from "../MainContent/MainContent";
+import axios from "axios";
 
 // import MainContent from "../MainContent/MainContent";
 
 const drawerWidth = 240;
 
 function Home() {
+  
+
   return (
     <div>
       <Grid container>

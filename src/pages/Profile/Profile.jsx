@@ -1,8 +1,26 @@
-import React, { useState } from "react";
-import { Avatar, Button, Divider, Grid, ImageList, ImageListItem } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Avatar,
+  Button,
+  Divider,
+  Grid,
+  ImageList,
+  ImageListItem,
+  Menu,
+} from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NavBar from "../../Components/NavBar/NavBar";
 import "./Profile.css";
+import AppsIcon from "@mui/icons-material/Apps";
+import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
+import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
+import { MenuItem, menuItemClasses } from "@mui/base/MenuItem";
+import { Dropdown } from "@mui/joy";
+import Settings from "./Settings";
+import { useNavigate } from "react-router-dom";
+import EditProfile from "../../Components/EditProfile/EditProfile.jsx";
+import axios from "axios";
+
 const imageContext = require.context(
   "../../assets/ExplorePics",
   false,
@@ -12,8 +30,21 @@ const imageFiles = imageContext.keys();
 const arrayOfPic = imageFiles.map((path) => imageContext(path));
 
 function Profile() {
-  const [posts, setPosts] = useState([]);
   const number = 10;
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const currentUser = JSON.parse(localStorage.getItem("current-account"));
+
+  const [posts, setPosts] = useState([]);
+
+  const getUsersPosts = () => {
+    axios.get(`http://16.170.173.197/posts/${currentUser.id}`).then((res) => {
+      setPosts(res.data.posts);
+    });
+  };
 
   return (
     <div>
@@ -27,19 +58,25 @@ function Profile() {
               <Avatar className="avatar" />
               <div className="profile-data">
                 <div className="profile-username">
-                  <h3>Username</h3>
+                  <h3>currentUser</h3>
                   <div className="btns">
-                    <Button className="profile-btn" variant="contained">
+                    <Button
+                      className="profile-btn"
+                      onClick={handleOpen}
+                      variant="contained"
+                      sx={{ marginTop: "-10px" }}
+                    >
                       Edit Profile
                     </Button>
-                    <Button className="profile-btn" variant="contained">
+                    <EditProfile open={open} handleClose={handleClose} />
+                    <Button
+                      className="profile-btn"
+                      variant="contained"
+                      sx={{ marginTop: "-10px" }}
+                    >
                       View Archive
                     </Button>
-                    <Button
-                      className="settings"
-                      startIcon={<SettingsIcon style={{ color: "#ffffff" }} />}
-                      disableRipple
-                    ></Button>
+                    <Settings />
                   </div>
                 </div>
                 <div className="profile-status">
@@ -71,23 +108,29 @@ function Profile() {
             <div className="profile-content">
               <div className="profile-content-buttons">
                 <Button variant="" disableRipple>
+                  <div className="top-border"></div>
+                  <AppsIcon sx={{ fontSize: "16px" }} />
                   Posts
                 </Button>
                 <Button variant="" disableRipple>
+                  <div className="top-border"></div>
+                  <BookmarkBorderOutlined sx={{ fontSize: "16px" }} />
                   Reels
                 </Button>
                 <Button variant="" disableRipple>
+                  <div className="top-border"></div>
+                  <AccountBoxOutlinedIcon sx={{ fontSize: "16px" }} />
                   Tagged
                 </Button>
               </div>
               <div className="content">
                 <ImageList className="image-list" cols={3} rowHeight={400}>
                   {" "}
-                  {arrayOfPic.map((item, index) => (
+                  {posts.map((post, index) => (
                     <ImageListItem className="image-container" key={index}>
                       <img
                         className="image"
-                        src={item}
+                        src={post.image}
                         alt=""
                         style={{ width: "100%", height: "100%" }}
                       />

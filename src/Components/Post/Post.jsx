@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Box, Button, Container, Divider } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SendIcon from "@mui/icons-material/Send";
@@ -6,44 +6,60 @@ import setup from "../../assets/iPhoneScreen.png";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import "./Post.css"; // Import your CSS file
+import axios from "axios";
+import "./Post.css";
 
-function Post(props) {
+function Post({ id, user, image, description, likes }) {
   const [liked, setLiked] = useState(true);
-
   const toggleLike = () => {
     setLiked(!liked);
   };
+
 
   return (
     <Container maxWidth="sm">
       <div className="post-container">
         <div className="post-header">
           <div className="post-owner">
-            <Avatar />
-            <p className="user-name">Obada</p>
+              <Avatar className="post-avatar" src={user.avatar} sx={{}} />
+              <p className="user-name">{user.userName}</p>
           </div>
-          <Button className="btn" disableRipple>
-            ...
-          </Button>
+          <div>
+            <Button className="btn" disableRipple>
+              ...
+            </Button>
+          </div>
         </div>
         <Box className={"post-content"}>
-          <img src={setup} alt="setup" />
+          <img src={image} alt="" />
         </Box>
         <div className="post-interactions">
-          <div onClick={toggleLike}>
-            {liked ? <FavoriteBorderIcon /> : <FavoriteIcon />}
+          <div>
+            <Button
+              onClick={toggleLike}
+              startIcon={liked ? <FavoriteBorderIcon /> : <FavoriteIcon />}
+              disableRipple
+            />
+            <Button
+              startIcon={<ChatBubbleOutlineOutlinedIcon />}
+              disableRipple
+            />
+            <Button startIcon={<SendIcon />} disableRipple />
           </div>
-          <ChatBubbleOutlineOutlinedIcon />
-          <SendIcon />
-          <BookmarkBorderOutlinedIcon style={{ marginLeft: "auto" }} />
+          <div>
+            <Button startIcon={<BookmarkBorderOutlinedIcon />} disableRipple />
+          </div>
         </div>
         <div className="post-text">
-          <p className="likes-text">likes</p>
-          <p className="user-name">UserName</p>
-          <p className="user-caption">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur nostrum hic, id, ut ex voluptates vitae cumque voluptatum quis harum aliquam doloribus facilis molestias similique quisquam, dicta sed! Asperiores, dolore.
-          </p>
+          <p className="post-text-username"> {likes.length} likes</p>
+          <div className="description-content">
+            <div className="description-content-inner">
+              <p className="post-text-username">{user.userName}</p>
+            </div>
+            <div className="description-content-inner">
+              <p>{description}</p>
+            </div>
+          </div>
         </div>
       </div>
     </Container>

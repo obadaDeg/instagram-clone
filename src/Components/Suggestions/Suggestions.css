@@ -1,6 +1,13 @@
 .suggestions-container {
   padding: 30px;
+  width: 80%;
+  max-height: 500px;
+  background-color: #000000;
 }
+.suggestions-body::-webkit-scrollbar {
+  display: none;
+}
+
 .suggestions-header {
   font-weight: bold;
   color: #8e8e8e;
@@ -9,12 +16,16 @@
 .suggestions-body {
   height: 290px;
   margin-top: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .suggestion-user {
   display: flex;
   padding: 5px 0;
   margin-top: 10px;
+  width: 70%;
+  overflow-x: hidden;
 }
 
 .suggestion-user-avatar {
@@ -34,8 +45,6 @@
   color: #8e8e8e;
 }
 
-
-
 .suggestion-user-follow Button {
   font-size: 12px;
   margin-top: 5px;
@@ -51,5 +60,15 @@
   margin-left: 100%;
   color: #ffffff;
   cursor: pointer;
+}
 
+.suggestion-user-info {
+  max-width: 70px;
+  overflow-x: hidden;
+}
+
+.suggestion-user-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

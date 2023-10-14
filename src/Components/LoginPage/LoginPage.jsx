@@ -9,14 +9,15 @@ import SignInUpper from "../SignIn/SignInUpper";
 import instagramLogo from "../../assets/instagram-logo.png";
 import SignInLower from "../SignIn/SignInLower";
 import SignUpLower from "../SignUp/SignUpLower";
-
+import axios from "axios";
 
 function LoginPage() {
-  let [flag, setFlag] = useState(true);
+  const [flag, setFlag] = useState(true);
 
   const handleFlag = () => {
     setFlag(!flag);
   };
+
 
   return (
     <>

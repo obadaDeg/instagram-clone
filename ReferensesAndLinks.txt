@@ -1,0 +1,18 @@
+1. Naviage component
+https://reactrouter.com/en/main/components/navigate
+
+
+2. 
+
+
+Errors and Problems:
+
+1. Paper-Button always as upper case
+https://stackoverflow.com/questions/25158435/paper-button-always-as-upper-case
+
+2. Force div element to stay in same place, when page is scrolled
+https://stackoverflow.com/questions/18746569/force-div-element-to-stay-in-same-place-when-page-is-scrolled
+
+3. How to hide navbar in login page in react router
+https://stackoverflow.com/questions/47281850/how-to-hide-navbar-in-login-page-in-react-router
+
