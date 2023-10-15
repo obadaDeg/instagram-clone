@@ -8,26 +8,26 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import axios from "axios";
 import "./Post.css";
+import PostSettigns from "./PostSettings";
 
 function Post({ id, user, image, description, likes }) {
   const [liked, setLiked] = useState(true);
+  
+  
   const toggleLike = () => {
     setLiked(!liked);
   };
-
 
   return (
     <Container maxWidth="sm">
       <div className="post-container">
         <div className="post-header">
           <div className="post-owner">
-              <Avatar className="post-avatar" src={user.avatar} sx={{}} />
-              <p className="user-name">{user.userName}</p>
+            <Avatar className="post-avatar" src={user.avatar} sx={{}} />
+            <p className="user-name">{user.userName}</p>
           </div>
           <div>
-            <Button className="btn" disableRipple>
-              ...
-            </Button>
+            <PostSettigns/>
           </div>
         </div>
         <Box className={"post-content"}>
@@ -51,7 +51,10 @@ function Post({ id, user, image, description, likes }) {
           </div>
         </div>
         <div className="post-text">
-          <p className="post-text-username"> {likes.length} likes</p>
+          <p className="post-text-username">
+            {" "}
+            {!liked ? likes.length + 1 : likes.length} likes
+          </p>
           <div className="description-content">
             <div className="description-content-inner">
               <p className="post-text-username">{user.userName}</p>

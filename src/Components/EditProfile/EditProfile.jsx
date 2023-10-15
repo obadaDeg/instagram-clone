@@ -91,7 +91,6 @@ function EditProfile({ open, handleClose }) {
   };
 
   const handleFormSubmit = (event) => {
-    event.preventDefault();
     handleSubmit();
   };
 

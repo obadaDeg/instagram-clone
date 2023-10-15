@@ -124,13 +124,13 @@ function Profile() {
                 </Button>
               </div>
               <div className="content">
-                <ImageList className="image-list" cols={3} rowHeight={400}>
+                <ImageList className="image-list" cols={3} rowHeight={350}>
                   {" "}
-                  {posts.map((post, index) => (
+                  {arrayOfPic.map((post, index) => (
                     <ImageListItem className="image-container" key={index}>
                       <img
                         className="image"
-                        src={post.image}
+                        src={post}
                         alt=""
                         style={{ width: "100%", height: "100%" }}
                       />

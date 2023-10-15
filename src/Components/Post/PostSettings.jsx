@@ -4,38 +4,32 @@ import { Menu } from "@mui/base/Menu";
 import { MenuButton } from "@mui/base/MenuButton";
 import { MenuItem, menuItemClasses } from "@mui/base/MenuItem";
 import { styled } from "@mui/system";
-import SettingsIcon from "@mui/icons-material/Settings";
-import { useNavigate } from "react-router-dom";
+import EditPost from "../EditPost/EditPost";
 
-export default function Settings() {
-  
-  const navigate = useNavigate();
-  function handleLogout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/Login");
-  }
+
+export default function PostSettings() {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
 
   return (
     <Dropdown>
       <TriggerButton>
-        <SettingsIcon style={{ color: "#ffffff" }} />{" "}
+        ...
       </TriggerButton>
       <Menu slots={{ listbox: StyledListbox }}>
-        <StyledMenuItem>
-          Profile
-        </StyledMenuItem>
-        <StyledMenuItem onClick={handleLogout}>
-          Log out
-        </StyledMenuItem>
+        <StyledMenuItem onClick={handleOpen}>EditPost</StyledMenuItem>
       </Menu>
+      <EditPost open={open} handleClose={handleClose} />
     </Dropdown>
   );
 }
 
 const darkTheme = {
-  background: "#000000", // Black background color
-  text: "#ffffff", // White text color
+  background: "#000000",
+  text: "#ffffff",
 };
 
 const StyledListbox = styled("ul")(
