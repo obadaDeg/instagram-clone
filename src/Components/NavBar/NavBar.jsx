@@ -31,6 +31,7 @@ function NavBar() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   
   return (
     <div className="navbar">
@@ -149,7 +150,7 @@ function NavBar() {
                   color: "#ffffff",
                 }}
               >
-                <Avatar></Avatar>
+                <Avatar src={currentUser.avatar} sx={{maxWidth: "33px", maxHeight: "33px"}}></Avatar>
                 Profile
               </Button>
             </Link>

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./MainPage.css";
 import { Avatar, Divider } from "@mui/material";
 import Post from "../Post/Post";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { GlobalData } from "../../Context/GlobalContext";
 
 const imageContext = require.context(
   "../../assets/StoriesAvatars",
@@ -13,20 +14,17 @@ const imageContext = require.context(
 const imageFiles = imageContext.keys();
 const arrayOfPic = imageFiles.map((path) => imageContext(path));
 
-function MainPage({ posts }) {
-  const postList = posts.map((post) => {
+function MainPage() {
+  const globalData = useContext(GlobalData);
+  const [description, setDescription] = useState("");
+  
+    
+    const postList = globalData.posts.map((post, index) => {
+      return <Post key={index} post={post} />;
+    });
+    
+    
     return (
-      <Post
-        id={post.id}
-        user={post.user}
-        image={post.image}
-        description={post.description}
-        likes={post.likes}
-      />
-    );
-  });
-
-  return (
     <div className="main-page">
       <div className="story-section">
         {arrayOfPic.map((item, index) => (

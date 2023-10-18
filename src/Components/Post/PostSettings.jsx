@@ -5,24 +5,37 @@ import { MenuButton } from "@mui/base/MenuButton";
 import { MenuItem, menuItemClasses } from "@mui/base/MenuItem";
 import { styled } from "@mui/system";
 import EditPost from "../EditPost/EditPost";
+import DeletePost from "../DeletePost/DeletePost";
 
+export default function PostSettings({ post }) {
+  const [open, setOpen] = React.useState({
+    edit: false,
+    delete: false,
+  });
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-export default function PostSettings() {
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+  const handleOpenEdit = () => setOpen({ ...open, edit: true });
+  const handleCloseEdit = () => setOpen({ ...open, edit: false });
+  const handleOpenDelete = () => setOpen({ ...open, delete: true });
+  const handleCloseDelete = () => setOpen({ ...open, delete: false });
+  
 
   return (
     <Dropdown>
-      <TriggerButton>
-        ...
-      </TriggerButton>
+      <TriggerButton>...</TriggerButton>
       <Menu slots={{ listbox: StyledListbox }}>
-        <StyledMenuItem onClick={handleOpen}>EditPost</StyledMenuItem>
+        {currentUser.id === post.user.id ? (
+          <>
+            <StyledMenuItem onClick={handleOpenEdit}>Edit Post</StyledMenuItem>
+            <StyledMenuItem onClick={handleOpenDelete}>Delete</StyledMenuItem>
+          </>
+        ) : (
+          <></>
+        )}
+        <StyledMenuItem>Report</StyledMenuItem>
       </Menu>
-      <EditPost open={open} handleClose={handleClose} />
+      <EditPost open={open.edit} handleClose={handleCloseEdit} post={post} />
+      <DeletePost open={open.delete} handleClose={handleCloseDelete} post={post} />
     </Dropdown>
   );
 }

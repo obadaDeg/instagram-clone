@@ -1,7 +1,11 @@
 import { Avatar, Button } from "@mui/material";
 import React from "react";
 
-function SuggestionPopOut({ user, btn = true }) {
+function SuggestionPopOut({
+  user = JSON.parse(localStorage.getItem("currentUser")),
+  btn = true,
+}) {
+
   return (
     <>
       <div className="suggestion-user">
@@ -12,7 +16,7 @@ function SuggestionPopOut({ user, btn = true }) {
           <div className="suggestion-user-info">
             <div className="suggestion-user-username">{user.userName}</div>
             {!btn ? (
-              <div className="suggestion-user-name">name</div>
+              <div className="suggestion-user-name">{user.userName}</div>
             ) : (
               <div className="suggestion-user-name">Followed by</div>
             )}

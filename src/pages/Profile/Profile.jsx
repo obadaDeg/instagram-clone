@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Avatar,
   Button,
@@ -19,32 +19,39 @@ import { Dropdown } from "@mui/joy";
 import Settings from "./Settings";
 import { useNavigate } from "react-router-dom";
 import EditProfile from "../../Components/EditProfile/EditProfile.jsx";
+import { GlobalData } from "../../Context/GlobalContext.jsx";
 import axios from "axios";
 
-const imageContext = require.context(
-  "../../assets/ExplorePics",
-  false,
-  /\.(avif|webp)$/
-);
-const imageFiles = imageContext.keys();
-const arrayOfPic = imageFiles.map((path) => imageContext(path));
-
 function Profile() {
-  const number = 10;
   const [open, setOpen] = React.useState(false);
+  const [posts, setPosts] = useState([]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const currentUser = JSON.parse(localStorage.getItem("current-account"));
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const token = localStorage.getItem("token");
 
-  const [posts, setPosts] = useState([]);
+  function getPosts() {
+    axios
+      .get("http://16.170.173.197/posts", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setPosts(res.data.posts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
-  const getUsersPosts = () => {
-    axios.get(`http://16.170.173.197/posts/${currentUser.id}`).then((res) => {
-      setPosts(res.data.posts);
-    });
-  };
+  useEffect(() => {
+    getPosts();
+  }, []);
+
+  const myPosts = posts.filter((post) => post.user.id === currentUser.id);
 
   return (
     <div>
@@ -55,10 +62,10 @@ function Profile() {
         <Grid item xs={10}>
           <div className="container">
             <div className="profile-header">
-              <Avatar className="avatar" />
+              <Avatar className="avatar" src={currentUser.avatar} />
               <div className="profile-data">
                 <div className="profile-username">
-                  <h3>currentUser</h3>
+                  <h3>{currentUser.userName}</h3>
                   <div className="btns">
                     <Button
                       className="profile-btn"
@@ -81,26 +88,26 @@ function Profile() {
                 </div>
                 <div className="profile-status">
                   <div className="profile-information">
-                    <p>{number} Posts</p>
+                    <p>{currentUser.likes ? currentUser.likes : 0} Posts</p>
                   </div>
                   <div className="profile-information">
-                    <p>{number} Followers</p>
+                    <p>
+                      {currentUser.followers ? currentUser.followers.length : 0}{" "}
+                      Followers
+                    </p>
                   </div>
                   <div className="profile-information">
-                    <p>{number} Following</p>
+                    <p>
+                      {currentUser.following ? currentUser.followers.length : 0}{" "}
+                      Following
+                    </p>
                   </div>
                 </div>
                 <div className="profile-bio">
                   <p>
-                    <strong>Profile Name</strong>
+                    <strong>{currentUser.userName}</strong>
                   </p>
-                  <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Autem natus quia facilis, sit provident, incidunt fugiat
-                    nulla dicta alias distinctio, deserunt repellendus
-                    asperiores consequatur odio iusto harum consectetur tenetur
-                    obcaecati?
-                  </p>
+                  <p>{currentUser.bio}</p>
                 </div>
               </div>
             </div>
@@ -124,19 +131,24 @@ function Profile() {
                 </Button>
               </div>
               <div className="content">
-                <ImageList className="image-list" cols={3} rowHeight={350}>
-                  {" "}
-                  {arrayOfPic.map((post, index) => (
-                    <ImageListItem className="image-container" key={index}>
-                      <img
-                        className="image"
-                        src={post}
-                        alt=""
-                        style={{ width: "100%", height: "100%" }}
-                      />
-                    </ImageListItem>
-                  ))}
-                </ImageList>
+                {posts.length > 0 ? (
+                  <ImageList className="image-list" cols={3} rowHeight={350}>
+                    {myPosts.map((post, index) => (
+                      <ImageListItem className="image-container" key={index}>
+                        <img
+                          className="image"
+                          src={post.image}
+                          alt=""
+                          style={{ width: "100%", height: "100%" }}
+                        />
+                      </ImageListItem>
+                    ))}
+                  </ImageList>
+                ) : (
+                  <p style={{ textAlign: "center", marginTop: "50px" }}>
+                    No posts to show{" "}
+                  </p>
+                )}
               </div>
             </div>
           </div>

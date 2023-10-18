@@ -10,10 +10,8 @@ import axios from "axios";
 import "./Post.css";
 import PostSettigns from "./PostSettings";
 
-function Post({ id, user, image, description, likes }) {
+function Post({ post }) {
   const [liked, setLiked] = useState(true);
-  
-  
   const toggleLike = () => {
     setLiked(!liked);
   };
@@ -23,15 +21,15 @@ function Post({ id, user, image, description, likes }) {
       <div className="post-container">
         <div className="post-header">
           <div className="post-owner">
-            <Avatar className="post-avatar" src={user.avatar} sx={{}} />
-            <p className="user-name">{user.userName}</p>
+            <Avatar className="post-avatar" src={post.user.avatar} sx={{}} />
+            <p className="user-name">{post.user.userName}</p>
           </div>
           <div>
-            <PostSettigns/>
+            <PostSettigns post={post}/>
           </div>
         </div>
         <Box className={"post-content"}>
-          <img src={image} alt="" />
+          <img src={post.image} alt="" />
         </Box>
         <div className="post-interactions">
           <div>
@@ -53,14 +51,14 @@ function Post({ id, user, image, description, likes }) {
         <div className="post-text">
           <p className="post-text-username">
             {" "}
-            {!liked ? likes.length + 1 : likes.length} likes
+            {!liked ? post.likes.length + 1 : post.likes.length} likes
           </p>
           <div className="description-content">
             <div className="description-content-inner">
-              <p className="post-text-username">{user.userName}</p>
+              <p className="post-text-username">{post.user.userName}</p>
             </div>
             <div className="description-content-inner">
-              <p>{description}</p>
+              <p>{post.description}</p>
             </div>
           </div>
         </div>
